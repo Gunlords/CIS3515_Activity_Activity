@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import android.content.Intent
+
 
 //const val = "somekeyvalue"
 class MainActivity : AppCompatActivity() {
@@ -41,17 +43,18 @@ class MainActivity : AppCompatActivity() {
         private val callback: (Int) -> Unit
     ) : RecyclerView.Adapter<TextSizeAdapter.TextSizeViewHolder>() {
 
-        // TODO Step 1: Complete onClickListener to return selected number
         inner class TextSizeViewHolder(val textView: TextView) : RecyclerView.ViewHolder(textView) {
             init {
                 textView.setOnClickListener {
-                    callback(textSizes[adapterPosition])
+                    callback(textSizes[adapterPosition]) // Pass selected size
                 }
             }
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TextSizeViewHolder {
-            return TextSizeViewHolder(TextView(parent.context).apply { setPadding(5, 20, 0, 20) })
+            return TextSizeViewHolder(TextView(parent.context).apply {
+                setPadding(5, 20, 0, 20)
+            })
         }
 
         override fun onBindViewHolder(holder: TextSizeViewHolder, position: Int) {
@@ -61,12 +64,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        override fun getItemCount(): Int {
-            return textSizes.size
-        }
-
+        override fun getItemCount(): Int = textSizes.size
     }
-}
+
 
 
 
